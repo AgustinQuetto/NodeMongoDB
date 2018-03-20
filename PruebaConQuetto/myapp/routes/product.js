@@ -75,12 +75,25 @@ router.post('/updateById' , (req,res,next) =>{
     })
 })
 
-router.post
+router.post('/findParams',(req,res,next) =>{
+  let parametros= req.body.parametros
+  let palabra
+  for(i = 0;i<parametros.lenght;i++)
+  {
+    
+  }
+  product.find().exec().then((result)=>{
+    res.json(result)
+  }),(err) =>{
+    return err
+  }
+})
 
 
-module.exports = router
+
 
 router.get('/hola',(req,res,next)=>{
-  res.sendFile(path.join(__dirname + 'views/indexLucas.html'))
-
+  res.render('indexLucas')
 })
+
+module.exports = router
