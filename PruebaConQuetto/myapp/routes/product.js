@@ -14,5 +14,73 @@ router.post('/insert', (req,res,next) =>{
    return res.sendStatus(200)
 })
 
-router.get('')
+router.post('/extractFirst',(req,res,next) =>{
+
+   product.findOne({}).exec().then((result) =>{
+     return res.json(result)
+   },(err) =>{
+     return err
+   })
+})
+
+
+router.post('/extractIdUrl',(req,res,next) =>{
+  let idProducto = req.query.id
+
+  product.findById(idProducto).exec().then((result) =>{
+    return res.json(result)
+    },(err) =>{
+        return err
+    })
+})
+
+router.post('/deleteIdBody',(req,res,next) => {
+  let idProducto = req.body.id
+
+  product.findByIdAndRemove(idProducto).exec().then((result) =>{
+    return res.json('Se va a eliminar: [' + result.name + ', ' + result.description + ', '
+    + result.price + ']')
+    },(err) =>{
+        return err
+    })
+})
+
+router.get('/deleteIdParam/:userID',(req,res,next) => {
+  let idProducto = req.params.userID
+
+  product.findByIdAndRemove(idProducto).exec().then((result)=>{
+    return res.json('Se va a eliminar: [' + result.name + ', ' + result.description + ', '
+    + result.price + ']')
+  }),(err) =>{
+    return err
+  }
+})
+
+router.post('/updateById' , (req,res,next) =>{
+  let idProducto = req.body.id
+  let productoActualizado
+  
+  product.findByIdAndUpdate(idProducto,{ name:req.body.name ,description:req.body.description,
+  price:req.body.price }).exec().then((result)=> {
+    return resul
+  }),(err) =>{
+    return err
+  }
+
+  product.findById(idProducto).exec().then((result) =>{
+    return res.json('Producto actualizado:  [' + result.name + ', ' + result.description + ', ' 
+    + result.price + ']')
+    },(err) =>{
+        return err
+    })
+})
+
+router.post
+
+
 module.exports = router
+
+router.get('/hola',(req,res,next)=>{
+  res.sendFile(path.join(__dirname + 'views/indexLucas.html'))
+
+})
